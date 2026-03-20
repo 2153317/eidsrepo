@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Eid Mubarak – Muhammad Saad Iqbal</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #d4a843;
+  --gold2: #f5d07a;
+  --green: #0b3d2e;
+  --green2: #16654a;
+  --cream: #fdf4e0;
+  --bg: #071a13;
+}
+
+html, body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Lato', sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(22,101,74,0.4) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 35% at 85% 85%, rgba(11,61,46,0.45) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+
+/* Canvas */
+#cv { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* Moon */
+.moon-box {
+  position:fixed; top:16px; right:16px; z-index:5;
+  animation: moonbob 5s ease-in-out infinite;
+}
+@keyframes moonbob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-11px)} }
+.moon {
+  width:68px; height:68px;
+  background: radial-gradient(circle at 38% 40%, #ffe880, #c99a20);
+  border-radius:50%;
+  box-shadow:0 0 28px 10px rgba(212,168,67,0.4),0 0 65px 22px rgba(212,168,67,0.14);
+  position:relative; overflow:hidden;
+}
+.moon-shadow {
+  position:absolute; top:5px; left:14px;
+  width:56px; height:56px;
+  background:var(--bg); border-radius:50%;
+}
+@media(min-width:480px){ .moon{width:86px;height:86px;} .moon-shadow{top:6px;left:17px;width:70px;height:70px;} }
+
+/* Wrapper */
+.wrap {
+  position:relative; z-index:2;
+  max-width:860px; margin:0 auto;
+  padding:72px 14px 80px;
+}
+
+/* Header */
+.hdr { text-align:center; }
+.arabic-big {
+  font-family:'Amiri',serif;
+  font-size:clamp(3rem,12vw,6.2rem);
+  color:var(--gold2); line-height:1.2;
+  text-shadow:0 0 40px rgba(212,168,67,.7),0 2px 0 rgba(0,0,0,.4);
+  animation:glowpulse 3s ease-in-out infinite;
+}
+@keyframes glowpulse {
+  0%,100%{text-shadow:0 0 30px rgba(212,168,67,.6);}
+  50%{text-shadow:0 0 65px rgba(245,208,122,1),0 0 110px rgba(212,168,67,.4);}
+}
+.eng-big {
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.1rem,5vw,2.5rem);
+  color:var(--gold); letter-spacing:.13em;
+  margin-top:8px; text-transform:uppercase;
+}
+.sub-tag {
+  font-size:clamp(.7rem,2.5vw,.88rem);
+  color:rgba(253,244,224,.5);
+  letter-spacing:.18em; margin-top:10px; text-transform:uppercase;
+}
+
+/* Divider */
+.div {
+  display:flex; align-items:center; gap:10px;
+  max-width:480px; margin:26px auto;
+}
+.div-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 50%,transparent);}
+.div-gem {
+  color:var(--gold); font-size:1.1rem;
+  display:inline-block;
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Section Label */
+.sec-lbl {
+  text-align:center;
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(.62rem,2vw,.78rem);
+  letter-spacing:.28em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:18px;
+}
+
+/* Carousel */
+.track-outer{overflow:hidden;width:100%;}
+.track {
+  display:flex; gap:14px;
+  overflow-x:auto; scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding:10px 6px 22px; scrollbar-width:none;
+}
+.track::-webkit-scrollbar{display:none;}
+
+.card {
+  flex-shrink:0;
+  width:min(82vw,300px);
+  scroll-snap-align:center;
+  background:linear-gradient(148deg,rgba(22,101,74,.78) 0%,rgba(7,26,19,.96) 100%);
+  border:1px solid rgba(212,168,67,.38); border-radius:18px;
+  padding:26px 20px 24px; position:relative; overflow:hidden;
+  cursor:pointer; transition:transform .3s,box-shadow .3s;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(0,0,0,.55),0 0 28px rgba(212,168,67,.18);}
+.card::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 18% 10%,rgba(212,168,67,.11),transparent 60%);
+  pointer-events:none;
+}
+.shimmer{
+  position:absolute;top:-60%;left:-75%;
+  width:45%;height:220%;
+  background:linear-gradient(110deg,transparent,rgba(255,255,255,.07),transparent);
+  transform:rotate(15deg); transition:left .8s ease; pointer-events:none;
+}
+.card:hover .shimmer{left:130%;}
+
+.c-em{font-size:2.1rem;margin-bottom:12px;display:block;}
+.c-tag{
+  font-family:'Cinzel Decorative',serif;
+  font-size:.62rem;letter-spacing:.22em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:10px;
+}
+.c-ar{
+  font-family:'Amiri',serif;
+  font-size:clamp(1.1rem,3.8vw,1.4rem);
+  color:var(--gold2); direction:rtl; line-height:2; margin-bottom:12px;
+}
+.c-en{font-size:clamp(.76rem,2.5vw,.87rem);line-height:1.75;color:rgba(253,244,224,.82);}
+
+/* Dots */
+.dots{display:flex;justify-content:center;gap:7px;margin-top:6px;}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(212,168,67,.28); cursor:pointer;
+  border:1px solid rgba(212,168,67,.4); transition:all .3s;
+}
+.dot.on{background:var(--gold);box-shadow:0 0 8px var(--gold);transform:scale(1.35);}
+
+/* Grand Dua */
+.grand-wrap{margin-top:46px;}
+.grand-box{
+  background:linear-gradient(155deg,rgba(22,101,74,.24),rgba(7,26,19,.82));
+  border:1px solid rgba(212,168,67,.3); border-radius:22px;
+  padding:clamp(22px,5vw,44px) clamp(16px,5vw,40px);
+  text-align:center; position:relative; overflow:hidden;
+}
+.grand-box::after{
+  content:'☽'; position:absolute; bottom:8px; right:16px;
+  font-size:5.5rem; color:rgba(212,168,67,.05); line-height:1; pointer-events:none;
+}
+.g-ar{
+  font-family:'Amiri',serif;
+  font-size:clamp(1.35rem,5vw,2.3rem);
+  color:var(--gold2); direction:rtl; line-height:2.2; margin-bottom:16px;
+  text-shadow:0 0 22px rgba(212,168,67,.35);
+}
+.g-tr{
+  font-style:italic; font-size:clamp(.76rem,2.5vw,.88rem);
+  color:rgba(253,244,224,.5); margin-bottom:14px; letter-spacing:.03em;
+}
+.g-mn{font-size:clamp(.8rem,2.5vw,.93rem);line-height:1.85;color:rgba(253,244,224,.82);}
+.g-ref{display:block;margin-top:10px;font-size:.72rem;color:rgba(253,244,224,.35);letter-spacing:.05em;}
+
+/* Wishes */
+.wishes-grid{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));
+  gap:14px;
+}
+.wish{
+  background:linear-gradient(138deg,rgba(22,101,74,.5),rgba(7,26,19,.9));
+  border:1px solid rgba(212,168,67,.22); border-radius:16px;
+  padding:22px 16px; text-align:center;
+  transition:transform .3s,border-color .3s;
+}
+.wish:hover{transform:translateY(-5px);border-color:rgba(212,168,67,.55);}
+.w-em{font-size:1.95rem;margin-bottom:9px;display:block;}
+.w-t{
+  font-family:'Amiri',serif;
+  font-size:clamp(.92rem,3vw,1.08rem);
+  color:var(--gold);margin-bottom:7px;font-weight:700;
+}
+.w-b{font-size:clamp(.73rem,2.3vw,.82rem);color:rgba(253,244,224,.7);line-height:1.7;}
+
+/* Signature */
+.sig{
+  margin-top:58px; text-align:center;
+  padding:30px 18px;
+  border-top:1px solid rgba(212,168,67,.2);
+}
+.sig-from{font-size:.7rem;letter-spacing:.28em;color:rgba(212,168,67,.55);text-transform:uppercase;margin-bottom:10px;}
+.sig-name{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.15rem,5.5vw,2.1rem);
+  color:var(--gold2);letter-spacing:.06em;
+  text-shadow:0 0 30px rgba(212,168,67,.5);
+  animation:glowpulse 3s ease-in-out infinite;
+}
+.sig-bar{width:100px;height:1px;background:var(--gold);margin:14px auto;opacity:.5;}
+.sig-tag{font-size:clamp(.7rem,2.5vw,.83rem);color:rgba(253,244,224,.42);letter-spacing:.1em;}
+
+/* Floaters */
+.floater{position:fixed;z-index:1;pointer-events:none;animation:rise linear infinite;opacity:0;}
+@keyframes rise{
+  0%{transform:translateY(108vh) rotate(-10deg);opacity:0;}
+  8%{opacity:.65;}
+  92%{opacity:.5;}
+  100%{transform:translateY(-18vh) rotate(10deg);opacity:0;}
+}
+
+/* Section gap */
+.mt{margin-top:44px;}
+
+/* Mobile fine-tune */
+@media(max-width:380px){
+  .wrap{padding:62px 10px 60px;}
+  .card{width:90vw;}
+  .grand-box{padding:18px 12px;}
+}
+@media(min-width:700px){
+  .card{width:280px;}
+  .wishes-grid{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+
+<div class="moon-box"><div class="moon"><div class="moon-shadow"></div></div></div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="arabic-big">عيد مبارك</div>
+    <div class="eng-big">Eid Mubarak</div>
+    <div class="sub-tag">✦ A Blessed Celebration ✦</div>
+  </div>
+
+  <div class="div">
+    <div class="div-line"></div>
+    <span class="div-gem">✦</span>
+    <div class="div-line"></div>
+    <span class="div-gem">🌙</span>
+    <div class="div-line"></div>
+    <span class="div-gem">✦</span>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- CAROUSEL -->
+  <div>
+    <div class="sec-lbl">✦ Du'as &amp; Eid Wishes ✦</div>
+    <div class="track-outer">
+      <div class="track" id="track">
+
+        <div class="card">
+          <div class="shimmer"></div>
+          <span class="c-em">🌙</span>
+          <div class="c-tag">Eid Greeting</div>
+          <div class="c-ar">عيد مبارك وعيد سعيد</div>
+          <div class="c-en">Wishing you a blessed and joyful Eid! May this sacred day fill your heart with happiness, your home with laughter, and your life with the endless light of Allah's blessings.</div>
+        </div>
+
+        <div class="card">
+          <div class="shimmer"></div>
+          <span class="c-em">🤲</span>
+          <div class="c-tag">Dua of Acceptance</div>
+          <div class="c-ar">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</div>
+          <div class="c-en"><em>"Taqabbalallāhu minnā wa minkum"</em> — May Allah accept from us and from you. This beloved dua has been exchanged among Muslims since the era of the Companions (Sahaba).</div>
+        </div>
+
+        <div class="card">
+          <div class="shimmer"></div>
+          <span class="c-em">☀️</span>
+          <div class="c-tag">Dua for Blessings</div>
+          <div class="c-ar">اللَّهُمَّ بَارِكْ لَنَا فِي أَيَّامِنَا</div>
+          <div class="c-en"><em>"Allāhumma bārik lanā fī ayyāminā"</em> — O Allah, bless us in our days. May every moment of this Eid and each day ahead overflow with Your divine grace and endless mercy.</div>
+        </div>
+
+        <div class="card">
+          <div class="shimmer"></div>
+          <span class="c-em">📖</span>
+          <div class="c-tag">Quranic Dua</div>
+          <div class="c-ar">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً</div>
+          <div class="c-en"><em>"Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, wa qinā 'adhāban-nār"</em> — Our Lord! Give us good in this world and the Hereafter, and guard us from the Fire. (Quran 2:201)</div>
+        </div>
+
+        <div class="card">
+          <div class="shimmer"></div>
+          <span class="c-em">💚</span>
+          <div class="c-tag">Annual Blessing</div>
+          <div class="c-ar">كل عام وأنتم بخير</div>
+          <div class="c-en">May every year find you in good health, happiness, and the warm company of loved ones. May Allah shower you with His endless mercy and keep you smiling always.</div>
+        </div>
+
+        <div class="card">
+          <div class="shimmer"></div>
+          <span class="c-em">🕊️</span>
+          <div class="c-tag">Dua for Forgiveness</div>
+          <div class="c-ar">اللَّهُمَّ اغْفِرْ لَنَا وَارْحَمْنَا وَعَافِنَا</div>
+          <div class="c-en"><em>"Allāhumma-ghfir lanā, wa-rḥamnā, wa-'āfinā"</em> — O Allah, forgive us, have mercy on us, and grant us well-being. May this Eid be a fresh start of piety and closeness to Allah.</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <!-- GRAND DUA -->
+  <div class="grand-wrap">
+    <div class="sec-lbl">✦ Grand Supplication ✦</div>
+    <div class="grand-box">
+      <div class="g-ar">
+        اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ<br>
+        تُحِبُّ الْعَفْوَ فَاعْفُ عَنَّا
+      </div>
+      <div class="g-tr">Allāhumma innaka 'afuwwun karīmun, tuḥibb-ul-'afwa fa'fu 'annā</div>
+      <div class="g-mn">
+        "O Allah, You are Pardoning and Generous; You love to pardon, so pardon us."
+        <span class="g-ref">— Sunan Ibn Mājah · Recited abundantly on Eid and the blessed nights</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHES -->
+  <div class="mt">
+    <div class="sec-lbl">✦ Heartfelt Wishes ✦</div>
+    <div class="wishes-grid">
+      <div class="wish"><span class="w-em">🕌</span><div class="w-t">Faith &amp; Devotion</div><div class="w-b">May your prayers be answered and your iman grow stronger with every blessed day.</div></div>
+      <div class="wish"><span class="w-em">🌹</span><div class="w-t">Health &amp; Wellness</div><div class="w-b">Wishing you radiant health, a sound mind, and a heart filled with peace this Eid.</div></div>
+      <div class="wish"><span class="w-em">🍽️</span><div class="w-t">Joy &amp; Celebration</div><div class="w-b">May your tables be full, your homes be merry, and your day surrounded by love.</div></div>
+      <div class="wish"><span class="w-em">🌿</span><div class="w-t">Peace &amp; Serenity</div><div class="w-b">May Allah grant tranquility to your heart, calm to your soul, and peace to your home.</div></div>
+      <div class="wish"><span class="w-em">💛</span><div class="w-t">Family &amp; Unity</div><div class="w-b">May this Eid strengthen the bonds of family and friendship in love and harmony.</div></div>
+      <div class="wish"><span class="w-em">🌟</span><div class="w-t">Success &amp; Prosperity</div><div class="w-b">May every door of halal opportunity open for you and bring abundance to your life.</div></div>
+    </div>
+  </div>
+
+  <div class="div" style="margin-top:50px">
+    <div class="div-line"></div>
+    <span class="div-gem">✦</span>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="sig">
+    <div class="sig-from">With Best Regards &amp; Heartfelt Du'as from</div>
+    <div class="sig-name">Muhammad Saad Iqbal</div>
+    <div class="sig-bar"></div>
+    <div class="sig-tag">🌙 Eid Mubarak 1446 AH &nbsp;·&nbsp; May Allah bless you always 🌙</div>
+  </div>
+
+</div>
+
+<script>
+/* ── CANVAS: Stars + Firework Particles ── */
+const cv  = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+let W, H;
+
+function resize() {
+  W = cv.width  = window.innerWidth;
+  H = cv.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+/* Stars */
+const STARS = Array.from({length: 210}, () => ({
+  x:  Math.random(),   // stored as 0-1 fraction
+  y:  Math.random(),
+  r:  Math.random() * 1.4 + 0.3,
+  a:  Math.random(),
+  da: (Math.random() * 0.004 + 0.002) * (Math.random() > .5 ? 1 : -1)
+}));
+
+/* Particles */
+const parts = [];
+const FW_COLS = ['#d4a843','#f5d07a','#1e8a62','#ffffff','#ffe880','#b8860b','#88e0b4'];
+
+function burst(x, y, n, col) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const s = Math.random() * 4.5 + 1.2;
+    parts.push({ x, y,
+      vx: Math.cos(a)*s, vy: Math.sin(a)*s - 0.5,
+      r: Math.random()*2.6+0.8, life:1,
+      decay: Math.random()*0.016+0.01, color: col });
+  }
+}
+
+function frame() {
+  ctx.clearRect(0, 0, W, H);
+
+  /* draw stars */
+  STARS.forEach(s => {
+    s.a += s.da;
+    if (s.a > 1 || s.a < 0) s.da *= -1;
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(240,208,128,${Math.max(0, Math.min(1, s.a))})`;
+    ctx.fill();
+  });
+
+  /* draw particles */
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const p = parts[i];
+    p.x += p.vx; p.y += p.vy; p.vy += 0.07;
+    p.life -= p.decay;
+    if (p.life <= 0) { parts.splice(i, 1); continue; }
+    ctx.globalAlpha = p.life;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  requestAnimationFrame(frame);
+}
+frame();
+
+/* Auto fireworks */
+function autoFW() {
+  burst(
+    Math.random() * W,
+    Math.random() * H * 0.55 + 40,
+    55,
+    FW_COLS[Math.floor(Math.random() * FW_COLS.length)]
+  );
+}
+setTimeout(() => { autoFW(); autoFW(); }, 500);
+setInterval(autoFW, 2600);
+
+/* Click / Touch fireworks */
+document.addEventListener('click', e => {
+  burst(e.clientX, e.clientY, 65, FW_COLS[Math.floor(Math.random()*FW_COLS.length)]);
+});
+document.addEventListener('touchstart', e => {
+  const t = e.touches[0];
+  burst(t.clientX, t.clientY, 50, FW_COLS[Math.floor(Math.random()*FW_COLS.length)]);
+}, {passive:true});
+
+/* ── FLOATING EMOJIS ── */
+const FL = ['🌙','✨','⭐','🏮','🕌','🌟','💛','🤲','🌹'];
+function spawnFloat() {
+  const el = document.createElement('span');
+  el.className = 'floater';
+  el.textContent = FL[Math.floor(Math.random()*FL.length)];
+  el.style.left = (Math.random()*96)+'vw';
+  el.style.fontSize = (1.0+Math.random()*1.7)+'rem';
+  const dur = 11 + Math.random()*13;
+  el.style.animationDuration = dur+'s';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), dur*1000+300);
+}
+spawnFloat(); spawnFloat();
+setInterval(spawnFloat, 3200);
+
+/* ── CAROUSEL ── */
+const track   = document.getElementById('track');
+const dotsBox = document.getElementById('dots');
+const cards   = track.querySelectorAll('.card');
+
+cards.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i===0 ? ' on' : '');
+  d.addEventListener('click', () =>
+    cards[i].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'})
+  );
+  dotsBox.appendChild(d);
+});
+const dotEls = dotsBox.querySelectorAll('.dot');
+
+function syncDots() {
+  let best = 0, best_d = Infinity;
+  cards.forEach((c, i) => {
+    const d = Math.abs(c.getBoundingClientRect().left + c.offsetWidth/2 - window.innerWidth/2);
+    if (d < best_d) { best_d = d; best = i; }
+  });
+  dotEls.forEach((d, i) => d.classList.toggle('on', i===best));
+}
+track.addEventListener('scroll', syncDots);
+
+/* Auto-advance */
+let auto = setInterval(() => {
+  const cur = [...dotEls].findIndex(d => d.classList.contains('on'));
+  const nxt = (cur+1) % cards.length;
+  cards[nxt].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+}, 3000);
+['touchstart','mousedown'].forEach(ev =>
+  track.addEventListener(ev, () => clearInterval(auto), {passive:true})
+);
+</script>
+</body>
+</html>
